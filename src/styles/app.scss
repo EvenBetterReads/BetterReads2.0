@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+  color: rgb(53, 53, 53);
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8043811274509804) 47%, rgba(142, 86, 3, 0.1685267857142857) 100%);
+}
+
+a {
+  color: blue;
+}
+
+h1 {
+  padding: 1em;
+  font-family: 'Bree Serif';
+  color: rgb(53, 53, 53);
+  text-shadow: 1px 1px 2px rgb(99, 99, 99);
+  font-size: 3em;
+  text-align: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 100%;
+  width: 100%;
+}

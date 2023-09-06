@@ -4,7 +4,7 @@ import AddBookForm from './AddBookForm';
 
 function LibraryContainer() {
   return (
-    <div className='matchTableContainer'>
+    <div className='matchTableContainer' style={styles.LibraryContainer}>
       <div className='outerBox'>
         <AddBookForm />
         <LibraryDashboard />
@@ -12,5 +12,12 @@ function LibraryContainer() {
     </div>
   );
 }
+
+const styles = {
+  LibraryContainer: {
+    display: 'flex',
+    width: '50%',
+  },
+};
 
 export default LibraryContainer;

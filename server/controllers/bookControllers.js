@@ -8,7 +8,7 @@ const bookController = {};
 //     return next();
 // }
 
-bookController.addBook = async (req, res, next) => {
+bookController.addBookReview = async (req, res, next) => {
   try {
     const { username, title, author, genre, summary, review } = req.body;
     console.log(title, author, genre, summary, review);

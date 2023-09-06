@@ -42,7 +42,7 @@ userController.verifyUser = async (req, res, next) => {
       if (!result) {
         res.redirect('/signup');
       } else {
-        res.locals.user = user.id;
+        res.locals.user = user._id;
       }
     });
 

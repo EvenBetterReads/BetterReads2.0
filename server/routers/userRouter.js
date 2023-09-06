@@ -38,9 +38,10 @@ router.post(
 router.post(
   '/signup',
   userController.createUser,
-  cookieController.setSSIDCookie,
-  sessionController.startSession,
+  // cookieController.setSSIDCookie,
+  // sessionController.startSession,
   (req, res) => {
+    console.log('redirecting to /dashboard');
     return res.status(201).redirect('/dashboard');
   },
 );

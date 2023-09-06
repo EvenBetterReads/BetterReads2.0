@@ -14,9 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../src')));
 
 // create a new user
-app.post('/signup', userController.createUser, (req, res) =>
-  res.status(200).json(res.locals.newUser),
-);
+app.post('/signup', userController.createUser, (req, res) => res.status(200).json(res.locals.newUser));
 
 // login
 app.post(
@@ -30,18 +28,10 @@ app.post(
 //     res.sendFile()
 // );
 
-app.post('/library', bookController.getBooks, (req, res) =>
-  res.status(200).json(res.locals.library),
-);
+app.post('/library', bookController.getBooks, (req, res) => res.status(200).json(res.locals.library));
 
 // add book to dashboard
-app.post(
-  '/dashboard',
-  bookController.addBook,
-  userController.findUser,
-  userController.addBook,
-  (req, res) => res.status(200).json(res.locals.newLibrary),
-);
+app.post('/dashboard', bookController.addBook, userController.findUser, userController.addBook, (req, res) => res.status(200).json(res.locals.newLibrary));
 
 // catch all
 app.use('*', (req, res) => {
@@ -60,6 +50,16 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+if (process.env.NODE_ENV === 'production') {
+  // statically serve everything in the build folder on the route '/build'
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+}
+
+console.log('NODE_ENV: ', process.env.NODE_ENV);
+
+// Start Server
 app.listen(PORT, () => {
-  console.log(`Server is listening on ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });
+
+module.exports = app;

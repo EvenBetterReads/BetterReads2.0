@@ -1,27 +1,20 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
+import '../styles/login-page.scss';
 // import other components here
 
 function LoginPage(props) {
   return (
-    <div>
-      <Routes id='loginContainer' style={styles.loginContainer}>
+    <div className='loginContainer'>
+      <Routes>
         <Route path='/' element={<LoginForm />} />
         <Route path='/signup' element={<SignupForm />} />
       </Routes>
     </div>
   );
 }
-
-const styles = {
-  loginContainer: {
-    display: 'flex',
-    fontFamily: 'Helvetica, Tahoma, san-serif',
-  },
-};
 
 export default LoginPage;

@@ -59,14 +59,14 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
 
     // Write Query to Select book reviews for user
     const text = `
-    SELECT _id, title, author, genre, rating, feeling
+    SELECT _id, title, author, genre, summary, rating
     FROM book_review
     WHERE user_id=($1)
     ORDER BY rating ASC;
     `;
     const value = [user_id];
     const result = await pool.query(text, value);
-    console.log(result);
+    console.log(req.body);
     res.locals.bookReviews = result.rows;
 
     return next();
@@ -85,16 +85,16 @@ bookReviewController.addBookReview = async (req, res, next) => {
   try {
     // Destructure book review items
     console.log(req.body);
-    const { user_id, title, author, genre, rating, feeling } =
+    const { user_id, title, author, genre, summary, rating } =
       req.body;
 
     // Write statement to insert
     const text = `
-    INSERT INTO book_review (user_id, title, author, genre, rating, feeling)
+    INSERT INTO book_review (user_id, title, author, genre, summary, rating)
     VALUES ($1, $2, $3, $4, $5, $6);
     `;
 
-    const values = [user_id, title, author, genre, rating, feeling];
+    const values = [user_id, title, author, genre, summary, rating];
     const result = await pool.query(text, values);
     console.log(result);
     res.locals.newBookReview = result.rows[0];
@@ -114,7 +114,7 @@ bookReviewController.updateBookReview = async (req, res, next) => {
   try {
     // Destructure
     //console.log(req.params);
-    const { title, author, genre, feeling } = req.body;
+    const { title, author, genre, summary, rating } = req.body;
 
     // Write statement to update
     const text = `
@@ -127,7 +127,7 @@ bookReviewController.updateBookReview = async (req, res, next) => {
       feeling = $5
     WHERE user_id = _id;
   `;
-    const values = [title, author, genre, rating, feeling];
+    const values = [title, author, genre, summary, rating];
     const result = await pool.query(text, values);
 
     res.locals.updateBookReview = result.rows[0];

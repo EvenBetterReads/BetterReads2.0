@@ -2,60 +2,61 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-    bookList: [],
-    bookCount: 0,
-    status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null,
+  bookList: [],
+  bookCount: 0,
+  status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  error: null,
 };
 
-export const getBooks = createAsyncThunk('library/getBooks', async (username) => {
-    try {
-        const response = await axios.post('/library', username);
-        return response.data;
-    } catch (err) {
-        console.log(err);
-    }
+export const getBooks = createAsyncThunk('library/getBooks', async username => {
+  try {
+    const response = await axios.post('/library', username);
+    console.log('test1');
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-export const addBook = createAsyncThunk('library/addBook', async (data) => {
-    try {
-        const response = await axios.post('/dashboard', data);
-        console.log(data);
-        return response.data;
-    } catch (err) {
-        console.log(err);
-    }
+export const addBook = createAsyncThunk('library/addBook', async data => {
+  try {
+    const response = await axios.post('/dashboard', data);
+    console.log(data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-export const removeBook = createAsyncThunk('library/removeBook', async (bookId) => {
-    try {
-        const response = await axios.delete('');
-        return response.data;
-    } catch (err) {
-        console.log(err);
-    }
+export const removeBook = createAsyncThunk('library/removeBook', async bookId => {
+  try {
+    const response = await axios.delete('');
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 const librarySlice = createSlice({
-    name: 'library',
-    initialState,
-    reducers: {
-        // bookAdded: {
-        //     reducer(state, action) {
-        //         state.bookList.push(action.payload)
-        //     },
-        // },
-    },
-    extraReducers(builder) {
-        builder
-            .addCase(getBooks.pending, (state, action) => {
-                state.status = 'loading'
-            })
-            .addCase(getBooks.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                // const loadedBooks = action.payload.map(book => {
-                //     return book;
-                // });
+  name: 'library',
+  initialState,
+  reducers: {
+    // bookAdded: {
+    //     reducer(state, action) {
+    //         state.bookList.push(action.payload)
+    //     },
+    // },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getBooks.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getBooks.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        // const loadedBooks = action.payload.map(book => {
+        //     return book;
+        // });
 
                 // Add any fetched books to the array
                 // state.bookList = state.bookList.concat(loadedBooks)

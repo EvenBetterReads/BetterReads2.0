@@ -6,6 +6,10 @@ INSERT INTO users(username, password) VALUES ('billybobswankins', 'notsafe');
 INSERT INTO users(username, password) VALUES ('yeetypie', 'what');
 
 
-INSERT INTO book_reviews(group_id, title, category, hyperlink, cost, date_of_event) VALUES ('1', 'Go to the beach', 'Fun', 'https://www.hotels.com/go/usa/south-beach-miami', 0, '2023-08-20 12:30:00');
-INSERT INTO book_reviews(group_id, title, category, hyperlink, cost, date_of_event) VALUES ('1', 'Go see a show', 'Entertainment', 'https://www.viator.com/tours/Paris/Crazy-Horse-Cabaret-in-Paris/d479-6281CRAZYHORSE', 100, '2023-08-23 14:20:00');
-INSERT INTO book_reviews(group_id, title, category, hyperlink, cost, date_of_event) VALUES ('1', 'Eat yummy food', 'Food', 'https://sexyfishmiami.com/?utm_source=YextGoogle&utm_medium=Organic', 20, '2023-08-21 20:00:00');
+
+INSERT INTO book_review(user_id, title, author, genre, summary, rating) VALUES ('1', 'Wild', 'Cheryl Strayed', 'Travel', 'So motivational', 5);
+INSERT INTO book_review(user_id, title, author, genre, summary, rating) VALUES ('1', 'Brave', 'Brene Brown', 'Self Hellp', 'So vulnerable.',  5);
+INSERT INTO book_review(user_id, title, author, genre, summary, rating) VALUES ('2', 'Cat in the Hat', 'Dr. Seuss', 'Childrens', 'The cat is kind of annoying', 3);
+INSERT INTO book_review(user_id, title, author, genre, summary, rating) VALUES ('2', 'Ricki Lake and the Great Lakes', 'Ricki Lake', 'Fan Fiction', 'Lake Superior is the GLOAT (greatest lake of all time)',  4);
+INSERT INTO book_review(user_id, title, author, genre, summary, rating) VALUES ('3', 'Ready Player One', 'Ernest Cline', 'Science Fiction', 'Book is way better than the movie',  4);
+

@@ -1,1 +1,1 @@
-DROP TABLE user_sessions, book_reviews,  users;
+DROP TABLE user_session, book_review,  users;

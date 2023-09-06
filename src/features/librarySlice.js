@@ -20,7 +20,7 @@ export const getBooks = createAsyncThunk('library/getBooks', async (username) =>
 export const addBook = createAsyncThunk('library/addBook', async (data) => {
     try {
         const response = await axios.post('/dashboard', data);
-        console.log(data);
+        // console.log(data);
         return response.data;
     } catch (err) {
         console.log(err);
@@ -61,7 +61,7 @@ const librarySlice = createSlice({
                 // state.bookList = state.bookList.concat(loadedBooks)
                 state.bookList = action.payload;
                 state.loggedIn = true;
-                console.log('payload', action.payload);
+                // console.log('payload', action.payload);
             })
             .addCase(getBooks.rejected, (state, action) => {
                 state.status = 'failed'

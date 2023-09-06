@@ -4,6 +4,8 @@ const express = require('express');
 // require controllers
 const userController = require('./controllers/userControllers');
 const bookController = require('./controllers/bookControllers');
+const bookReviewRouter = require('./routers/bookReviewRouter');
+const userRouter = require('./routers/userRouter');
 
 const app = express();
 const PORT = 3005;

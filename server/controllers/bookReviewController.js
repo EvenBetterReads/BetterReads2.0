@@ -80,7 +80,7 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
   }
 };
 
-bookReviewController.addReview = async (req, res, next) => {
+bookReviewController.addBookReview = async (req, res, next) => {
   //
   try {
     // Destructure book review items

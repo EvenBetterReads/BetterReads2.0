@@ -18,7 +18,7 @@ const router = express.Router();
 router.get(
   '/:id',
   bookReviewController.getAllBookReviews,
-  bookReviewController.verifyUser,
+  // bookReviewController.verifyUser,
   (req, res) => {
     return res.status(200).json(res.locals.bookReviews);
   },

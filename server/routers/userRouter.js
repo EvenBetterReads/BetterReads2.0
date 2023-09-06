@@ -52,7 +52,7 @@ router.post(
  * @returns response status 200
  */
 router.put(
-  'update/:userId/',
+  '/:userId/',
   userController.verifyUser,
   userController.updateUser,
   (req, res) => {
@@ -67,7 +67,7 @@ router.put(
  * @returns successful deletion status
  */
 router.delete(
-  'delete/:userId',
+  '/:userId',
   userController.verifyUser,
   userController.deleteUser,
   (req, res) => {

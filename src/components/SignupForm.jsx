@@ -70,6 +70,9 @@ function SignupForm(props) {
 }
 
 const styles = {
+  h2: {
+    fontFamily: 'Helvectica, Tahoma, san-serif',
+  },
   loginContainer: {
     display: 'flex',
     flexDirection: 'column',

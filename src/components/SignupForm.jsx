@@ -24,14 +24,14 @@ function SignupForm(props) {
   };
 
   return (
-    <div id='SignupContainer' style={styles.h3}>
-      <Stack style={styles.h3}>
-        <h2>Sign Up</h2>
+    <div className='SignupContainer' style={styles.signupContainer}>
+      <Stack style={styles.signupContainer}>
+        <h2 style={styles.h2}>Sign Up</h2>
         <span style={styles.error}>
           {failedSignup ? 'Error in signup form' : ''}
         </span>
         <form onSubmit={handleSubmit} style={styles.form}>
-          <TextField
+          <TextField style={styles.textField}
             required
             size='small'
             id='username'
@@ -41,7 +41,7 @@ function SignupForm(props) {
             variant='filled'
             onChange={e => setUsername(e.target.value)}
           />
-          <TextField
+          <TextField style={styles.textField}
             required
             size='small'
             id='password'
@@ -52,7 +52,7 @@ function SignupForm(props) {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <Button
+          <Button styles={styles.button}
             variant='outlined'
             size='small'
             id='signup'
@@ -61,7 +61,7 @@ function SignupForm(props) {
             Sign Up
           </Button>
         </form>
-        <p>
+        <p style={styles.noAccount}>
           Already have an account? <Link to='/'>Login!</Link>
         </p>
       </Stack>
@@ -73,30 +73,18 @@ const styles = {
   h2: {
     fontFamily: 'Helvectica, Tahoma, san-serif',
   },
-  loginContainer: {
+  signupContainer: {
     display: 'flex',
     flexDirection: 'column',
-    border: 'solid thin black',
     alignItems: 'center',
-    width: '30%',
-    minWidth: '240px',
-    maxWidth: '350px',
+    width: '100%',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    border: 'solid thin black',
     alignItems: 'center',
-    width: '100%%',
-    margin: '20px 10px 100px 10px',
-  },
-  h3: {
-    display: 'flex',
-    flexDirection: 'column',
-    border: 'solid thin black',
-    alignItems: 'center',
-    width: '100%%',
-    textWrap: 'true',
+    width: '100%',
+    margin: '2em',
   },
   error: {
     color: 'red',
@@ -104,6 +92,21 @@ const styles = {
     position: 'absolute',
     alignSelf: 'center',
     testWrap: 'wrap',
+  },
+  button: {
+    margin: '1em',
+    border: '1px solid #c72ffa',
+    background: '#c72ffa',
+    color: 'white',
+  },
+  noAccount: {
+    fontFamily: 'Helvetica, Tahoma, san-serif',
+  },
+  textField: {
+    border: '1px solid darkgray',
+    borderRadius: '0.25em',
+    margin: '.15em',
+    boxShadow: '0',
   },
 };
 

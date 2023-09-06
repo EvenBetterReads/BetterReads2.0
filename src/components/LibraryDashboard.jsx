@@ -42,23 +42,18 @@ function LibraryDashboard() {
   ];
 
   return (
-    <div className='libraryDashboard'>
-      <Box
-        sx={{
-          height: 520,
-          width: '100%',
-        }}>
-        <DataGrid
-          sx={{
-            boxShadow: 2,
-            border: 2,
-          }}
-          rows={rows}
-          columns={columns}
-        />
+    <div style={styles.LibraryDashboard} className='libraryDashboard'>
+      <Box>
+        <DataGrid rows={rows} columns={columns} />
       </Box>
     </div>
   );
 }
+
+const styles = {
+  LibraryDashboard: {
+    display: 'flex',
+  },
+};
 
 export default LibraryDashboard;

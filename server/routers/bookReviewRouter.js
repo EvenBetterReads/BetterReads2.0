@@ -16,16 +16,12 @@ const router = express.Router();
  * @returns All itineraries for the group Id
  */
 router.get(
-  '/:libraryId',
-  (req, res, next) => {
-    res.locals.userId = '3';
-    return next();
-  },
+  '/:id',
+  bookReviewController.getAllBookReviews,
   bookReviewController.verifyUser,
-  bookReviewController.bookReviews,
   (req, res) => {
     return res.status(200).json(res.locals.bookReviews);
-  }
+  },
 );
 
 /**
@@ -43,12 +39,12 @@ router.get(
  *
  * @returns response status 201
  */
-router.post('/:libraryId/', bookReviewController.addBookReview, (req, res) => {
+router.post('/:id', bookReviewController.addBookReview, (req, res) => {
   return res.status(201).json(res.locals.newBookReview);
 });
 
 router.put(
-  '/:libraryId/book_review/:id',
+  '/:id',
   bookReviewController.updateBookReview,
   (req, res) => {
     return res.status(201).json(res.locals.updateBookReview);
@@ -65,7 +61,7 @@ router.put(
  * @returns successful deletion status
  */
 router.delete(
-  '/:libraryId/book_review/:id',
+  '/:id',
   bookReviewController.deleteBookReview,
   (req, res) => {
     return res.status(200).json(res.locals.deleteBookReview);

@@ -2,9 +2,10 @@ const path = require('path');
 const express = require('express');
 
 // require controllers
-const { restart } = require('nodemon');
-const userController = require('./controllers/userControllers');
-const bookController = require('./controllers/bookControllers');
+// const userController = require('./controllers/userControllers');
+// const bookController = require('./controllers/bookControllers');
+const bookReviewRouter = require('./routers/bookReviewRouter');
+const userRouter = require('./routers/userRouter');
 
 const app = express();
 const PORT = 3005;
@@ -13,39 +14,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../src')));
 
-// create a new user
-app.post('/signup', userController.createUser, (req, res) => res.status(200).json(res.locals.newUser));
+app.use('/api/user', userRouter);
 
-// login
-app.post(
-  '/login',
-  userController.verifyUser,
-  (req, res) => res.status(200).json(res.locals),
-  //   res.redirect('/dashboard'),
-);
+app.use('/api/book_review', bookReviewRouter);
 
-// app.get('/dashboard', (req, res) =>
-//     res.sendFile()
-// );
-
-app.post('/library', bookController.getBooks, (req, res) => res.status(200).json(res.locals.library));
-
-// add book to dashboard
-app.post('/dashboard', bookController.addBook, userController.findUser, userController.addBook, (req, res) => res.status(200).json(res.locals.newLibrary));
-
-// catch all
-app.use('*', (req, res) => {
-  res.sendStatus(404).send('What the dog doin?');
-});
+// catch-all route handler for any requests to an unknown route
+app.use((req, res) => res.status(404).send('Unknown Route'));
 
 // global error handler
 app.use((err, req, res, next) => {
-  const defaultError = {
+  const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
-    message: { err: 'An error occurred. RIP.' },
+    message: { err: 'An error occurred' },
   };
-  const errorObj = { ...defaultError, ...err };
+  const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
@@ -55,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/build', express.static(path.join(__dirname, '../build')));
 }
 
-console.log('NODE_ENV: ', process.env.NODE_ENV);
+// console.log('NODE_ENV: ', process.env.NODE_ENV);
 
 // Start Server
 app.listen(PORT, () => {

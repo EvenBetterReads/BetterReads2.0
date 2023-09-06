@@ -17,15 +17,11 @@ const router = express.Router();
  */
 router.get(
   '/:id',
-  (req, res, next) => {
-    res.locals.userId = '3';
-    return next();
-  },
-  bookReviewController.verifyUser,
-  bookReviewController.bookReviews,
+  bookReviewController.getAllBookReviews,
+  // bookReviewController.verifyUser,
   (req, res) => {
     return res.status(200).json(res.locals.bookReviews);
-  }
+  },
 );
 
 /**

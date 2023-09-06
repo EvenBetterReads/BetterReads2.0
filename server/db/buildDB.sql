@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS book_review(
     title varchar NOT NULL,
     author varchar NOT NULL,
     genre varchar NOT NULL,
+    summary varchar NOT NULL,
     rating varchar NOT NULL,
-    feeling varchar NOT NULL,
     CONSTRAINT "book_review_pk0" PRIMARY KEY ("_id")
 ) WITH (OIDS=FALSE);
 

@@ -20,11 +20,7 @@ function LoginPage(props) {
 const styles = {
   loginContainer: {
     display: 'flex',
-    flexDirection: 'column',
-    border: 'solid thin black',
-    alignItems: 'center',
-    minWidth: '240px',
-    backgroundColor: 'red',
+    fontFamily: 'Helvetica, Tahoma, san-serif',
   },
 };
 

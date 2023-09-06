@@ -15,8 +15,9 @@ function LibraryDashboard() {
   };
 
   useEffect(() => {
+    console.log('test');
     dispatch(getBooks(body));
-  }, rows);
+  }, [rows]);
 
   const rows = bookData.map((book, index) => ({
     id: index + 1,

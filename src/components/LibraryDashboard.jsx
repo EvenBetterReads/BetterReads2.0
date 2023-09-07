@@ -41,7 +41,7 @@ function LibraryDashboard() {
     author: book.author,
     genre: book.genre,
     summary: book.summary,
-    review: book.review,
+    review: book.rating,
   }));
 
   const columns = [

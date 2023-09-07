@@ -28,9 +28,37 @@ function LoginForm(props) {
     <div className='credentials'>
       <span>{failedLogin ? 'incorrect username or password' : ''}</span>
       <form onSubmit={handleSubmit}>
-        <TextField className='inputBox' required size='small' id='username' label='Username' placeholder='Username' autoComplete='current-username' value={username} variant='filled' onChange={e => setUsername(e.target.value)} />
-        <TextField className='inputBox' required size='small' id='password' type='password' placeholder='Password' label='Password' autoComplete='current-password' variant='filled' value={password} onChange={e => setPassword(e.target.value)} />
-        <button variant='outlined' size='small' id='login' className='auth-button' type='submit'>
+        <TextField
+          className='inputBox'
+          required
+          size='small'
+          id='username'
+          label='Username'
+          placeholder='Username'
+          autoComplete='current-username'
+          value={username}
+          variant='filled'
+          onChange={e => setUsername(e.target.value)}
+        />
+        <TextField
+          className='inputBox'
+          required
+          size='small'
+          id='password'
+          type='password'
+          placeholder='Password'
+          label='Password'
+          autoComplete='current-password'
+          variant='filled'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button
+          variant='outlined'
+          size='small'
+          id='login'
+          className='auth-button'
+          type='submit'>
           Log In
         </button>
       </form>

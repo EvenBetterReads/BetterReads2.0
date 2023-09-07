@@ -52,13 +52,15 @@ sessionController.isLoggedIn = async (req, res, next) => {
  */
 sessionController.startSession = async (req, res, next) => {
   try {
-    console.log('THIS IS OUR REQUEST COOKIES:', res.locals.cookie);
     const text = `
     INSERT INTO user_session (cookie_id, user_id, date_of_creation)
-    VALUE ($1, $2, $3);
+    VALUES ($1, $2, $3);
     `;
-    const value = [res.locals.cookie, res.locals.user, Date.now()];
-    const user_session = await pool.query(text, value);
+    const timestamp = Date.now();
+    const values = [res.locals.user, res.locals.user, timestamp];
+
+    const user_session = await pool.query(text, values);
+
     return next();
   } catch (err) {
     return next({

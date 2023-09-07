@@ -29,7 +29,7 @@ userController.verifyUser = async (req, res, next) => {
     const text = `
     SELECT *
     FROM users
-    WHERE username=($1);
+    WHERE username = ($1)
     `;
     const value = [username];
     const user = await pool.query(text, value);
@@ -43,7 +43,7 @@ userController.verifyUser = async (req, res, next) => {
     if (!comparison) {
       res.redirect('/signup');
     } else {
-      res.locals.user = user._id;
+      res.locals.user = user.rows[0]._id;
       // If we have a row we can move on to the next verification
       return next();
     }

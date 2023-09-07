@@ -23,7 +23,7 @@ router.post(
   cookieController.setSSIDCookie,
   sessionController.isLoggedIn,
   (req, res) => {
-    return res.status(200).redirect('/dashboard');
+    return res.sendStatus(200);
   },
 );
 
@@ -42,7 +42,7 @@ router.post(
   sessionController.startSession,
   (req, res) => {
     console.log('redirecting to /dashboard');
-    return res.status(201).redirect('/dashboard');
+    return res.sendStatus(201);
   },
 );
 

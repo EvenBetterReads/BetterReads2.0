@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { signupUser, reload } from '../features/userSlice';
-import '../styles/login-signup-form.scss';
+import '../styles/login.scss';
 // import other components here
 
 function SignupForm(props) {
@@ -40,40 +40,5 @@ function SignupForm(props) {
     </div>
   );
 }
-
-const styles = {
-  loginContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    border: 'solid thin black',
-    alignItems: 'center',
-    width: '30%',
-    minWidth: '240px',
-    maxWidth: '350px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    border: 'solid thin black',
-    alignItems: 'center',
-    width: '100%%',
-    margin: '20px 10px 100px 10px',
-  },
-  h3: {
-    display: 'flex',
-    flexDirection: 'column',
-    border: 'solid thin black',
-    alignItems: 'center',
-    width: '100%%',
-    textWrap: 'true',
-  },
-  error: {
-    color: 'red',
-    fontSize: 'small',
-    position: 'absolute',
-    alignSelf: 'center',
-    testWrap: 'wrap',
-  },
-};
 
 export default SignupForm;

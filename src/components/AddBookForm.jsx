@@ -41,7 +41,7 @@ function AddBookForm() {
   return (
     <div className='addBookFrom' style={StyleSheet.addBookForm}>
       <form onSubmit={handleSubmit}>
-        <FormGroup style={styles.formGroup}>
+        <FormGroup className='formGroup'>
           <FormLabel component='legend'>Title</FormLabel>
           <TextField required name='title' variant='outlined' placeholder='Harry Potter and The Sorcerers Stone...' value={title} onChange={e => setTitle(e.target.value)} sx={{ paddingBottom: 2 }} />
           <FormLabel component='legend'>Author</FormLabel>
@@ -61,13 +61,6 @@ function AddBookForm() {
   );
 }
 
-const styles = {
-  addBookForm: {
-    display: 'flex',
-  },
-  formGroup: {
-    display: 'flex',
-  },
-};
+
 
 export default AddBookForm;

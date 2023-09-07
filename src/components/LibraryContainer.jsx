@@ -1,10 +1,11 @@
 import React from 'react';
 import LibraryDashboard from './libraryDashboard';
 import AddBookForm from './AddBookForm';
+import '../styles/library.scss';
 
 function LibraryContainer() {
   return (
-    <div className='matchTableContainer' style={styles.LibraryContainer}>
+    <div className='matchTableContainer'>
       <div className='outerBox'>
         <AddBookForm />
         <LibraryDashboard />
@@ -12,12 +13,5 @@ function LibraryContainer() {
     </div>
   );
 }
-
-const styles = {
-  LibraryContainer: {
-    display: 'flex',
-    width: '50%',
-  },
-};
 
 export default LibraryContainer;

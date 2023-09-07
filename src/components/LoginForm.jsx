@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser, reload } from '../features/userSlice';
 import { TextField } from '@mui/material';
-import '../styles/login-signup-form.scss';
+import '../styles/login.scss';
 // import other components here
 
 function LoginForm(props) {
@@ -34,6 +34,9 @@ function LoginForm(props) {
           Log In
         </button>
       </form>
+      <div>
+        <img src={require('/assets/books-icon.jpg')} />
+      </div>
       <p>
         Don't have an account? <Link to='/signup'>Sign Up!</Link>
       </p>

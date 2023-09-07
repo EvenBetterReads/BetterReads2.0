@@ -21,7 +21,10 @@ Reviewing the existing codebase to manage state for debugging the issue with the
 3. Create a lending library feed, which allows you to see the highest rated books of other users
 
 ## What is the technology stack?
-React, Redux, Redux Toolkit, React Router, BCrypt, MongoDB/Mongoose
+1. React & React Router
+2. Redux & Redux Toolkit
+3. bcrypt
+4. MongoDB/Mongoose -> PostgreSQL
 
 ## Team
 1. Gayle: Frontend

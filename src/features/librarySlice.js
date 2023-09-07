@@ -10,6 +10,7 @@ const initialState = {
 
 export const getBooks = createAsyncThunk('library/getBooks', async userId => {
   try {
+    console.log('get books userId', userId);
     userId = 7;
     const response = await axios.get(`/api/book_review/${userId}`);
     return response.data;

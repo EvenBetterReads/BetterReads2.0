@@ -34,9 +34,6 @@ function LoginForm(props) {
           Log In
         </button>
       </form>
-      <div>
-        <img src={require('/assets/books-icon.jpg')} />
-      </div>
       <p>
         Don't have an account? <Link to='/signup'>Sign Up!</Link>
       </p>

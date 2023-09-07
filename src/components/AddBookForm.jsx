@@ -38,7 +38,7 @@ function AddBookForm() {
   };
 
   return (
-    <div className='addBookFrom' style={StyleSheet.addBookForm}>
+    <div className='addBookFrom'>
       <form onSubmit={handleSubmit}>
         <FormGroup className='formGroup'>
           <FormLabel component='legend'>Title</FormLabel>

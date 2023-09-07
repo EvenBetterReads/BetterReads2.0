@@ -1,0 +1,42 @@
+.outerBox {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 3em;
+  border-radius: 10px;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  margin: 0;
+}
+
+.field {
+  width: 40%;
+}
+
+button {
+  width: 6em;
+  border: 1px solid #93a210;
+  background: c72ffa;
+  color: white;
+  font-size: large;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  background-color: #93a210;
+
+  &:hover {
+    background-color: #b9c07f;
+  }
+}
+
+.box {
+  display: flex;
+}

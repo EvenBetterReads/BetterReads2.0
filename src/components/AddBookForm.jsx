@@ -1,11 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Box from '@mui/material/Box';
 import {
-  Button,
-  Checkbox,
-  FormControlLabel,
   FormGroup,
   FormLabel,
   Rating,
@@ -29,7 +25,7 @@ function AddBookForm() {
   const [summary, setSummary] = useState('');
   const [review, setReview] = useState(0);
 
-  const username = useSelector(state => state.user.username);
+  const userId = useSelector(state => state.user.userId);
 
   const dispatch = useDispatch();
 
@@ -37,12 +33,12 @@ function AddBookForm() {
     e.preventDefault();
     dispatch(
       addBook({
-        username,
+        user_id: userId,
         title,
         author,
         genre,
         summary,
-        review,
+        rating: review,
       }),
     );
   };
@@ -50,16 +46,11 @@ function AddBookForm() {
   return (
     <div className='addBookFrom'>
       <form onSubmit={handleSubmit}>
-        <FormGroup
-          sx={{
-            padding: 2,
-            borderRadius: 2,
-            border: '1px solid',
-            borderColor: 'primary.main',
-          }}>
+        <FormGroup className='formGroup'>
           <FormLabel component='legend'>Title</FormLabel>
           <TextField
             required
+            className='field'
             name='title'
             variant='outlined'
             placeholder='Harry Potter and The Sorcerers Stone...'
@@ -70,6 +61,7 @@ function AddBookForm() {
           <FormLabel component='legend'>Author</FormLabel>
           <TextField
             required
+            className='field'
             name='author'
             variant='outlined'
             placeholder='J.K. Rowling...'
@@ -79,6 +71,7 @@ function AddBookForm() {
           />
           <FormLabel component='legend'>Genre</FormLabel>
           <TextField
+            className='field'
             name='genre'
             variant='outlined'
             placeholder='Fantasy...'
@@ -88,6 +81,7 @@ function AddBookForm() {
           />
           <FormLabel component='legend'>Summary</FormLabel>
           <TextField
+            className='field'
             name='summary'
             variant='outlined'
             placeholder=''
@@ -102,9 +96,7 @@ function AddBookForm() {
             onChange={e => setReview(e.target.value)}
             sx={{ paddingBottom: 2 }}
           />
-          <Button type='submit' variant='outlined'>
-            Submit
-          </Button>
+          <button type='submit'>Submit</button>
         </FormGroup>
       </form>
     </div>

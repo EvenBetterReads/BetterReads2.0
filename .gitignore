@@ -1,1 +1,14 @@
-node_modules
+#Our database URL which should be private in dbURL.js
+server/secrets/
+secrets*
+
+#DS store
+.DS_store
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+dist/

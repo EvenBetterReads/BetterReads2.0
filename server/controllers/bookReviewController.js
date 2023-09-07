@@ -27,7 +27,7 @@ bookReviewController.verifyUser = async (req, res, next) => {
     const result = await pool.query(text, values);
     if (!result.rows.length) {
       throw new Error(
-        `bookReviewController.verifyUserGroup Error: No combination for User: ${userId} and Group: ${groupId}`
+        `bookReviewController.verifyUserGroup Error: No combination for User: ${userId} and Group: ${groupId}`,
       );
     }
 
@@ -56,7 +56,8 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
   try {
     // Destructure user_id
     const { user_id } = req.params;
-    // console.log(user_id);
+
+    console.log(user_id);
     // Write Query to Select book reviews for user
     const text = `
     SELECT _id, title, author, genre, summary, rating
@@ -67,7 +68,7 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
     const value = [user_id];
     const result = await pool.query(text, value);
     // console.log(req.body);
-    // console.log('this is result', result);
+    console.log('this is result', result);
     res.locals.bookReviews = result.rows;
 
     return next();
@@ -86,8 +87,7 @@ bookReviewController.addBookReview = async (req, res, next) => {
   try {
     // Destructure book review items
     console.log(req.body);
-    const { user_id, title, author, genre, summary, rating } =
-      req.body;
+    const { user_id, title, author, genre, summary, rating } = req.body;
 
     // Write statement to insert
     const text = `
@@ -115,7 +115,7 @@ bookReviewController.updateBookReview = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { title, author, genre, summary, rating } = req.body;
-    console.log(req.body)
+    console.log(req.body);
 
     // Write statement to update
     const text = `

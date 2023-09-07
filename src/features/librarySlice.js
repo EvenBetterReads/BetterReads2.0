@@ -8,10 +8,10 @@ const initialState = {
   error: null,
 };
 
-export const getBooks = createAsyncThunk('library/getBooks', async username => {
+export const getBooks = createAsyncThunk('library/getBooks', async userId => {
   try {
-    const response = await axios.post('/library', username);
-    console.log('test1');
+    userId = 7;
+    const response = await axios.get(`/api/book_review/${userId}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -21,21 +21,23 @@ export const getBooks = createAsyncThunk('library/getBooks', async username => {
 export const addBook = createAsyncThunk('library/addBook', async data => {
   try {
     const response = await axios.post('/dashboard', data);
-    console.log(data);
     return response.data;
   } catch (err) {
     console.log(err);
   }
 });
 
-export const removeBook = createAsyncThunk('library/removeBook', async bookId => {
-  try {
-    const response = await axios.delete('');
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-});
+export const removeBook = createAsyncThunk(
+  'library/removeBook',
+  async bookId => {
+    try {
+      const response = await axios.delete('');
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+);
 
 const librarySlice = createSlice({
   name: 'library',
@@ -58,21 +60,21 @@ const librarySlice = createSlice({
         //     return book;
         // });
 
-                // Add any fetched books to the array
-                // state.bookList = state.bookList.concat(loadedBooks)
-                state.bookList = action.payload;
-                state.loggedIn = true;
-                console.log('payload', action.payload);
-            })
-            .addCase(getBooks.rejected, (state, action) => {
-                state.status = 'failed'
-                state.error = action.error.message
-            })
-            .addCase(addBook.fulfilled, (state, action) => {
-                state.bookList.push(action.payload)
-            })
-    }
-})
+        // Add any fetched books to the array
+        // state.bookList = state.bookList.concat(loadedBooks)
+        state.bookList = action.payload;
+        state.loggedIn = true;
+        console.log('payload', action.payload);
+      })
+      .addCase(getBooks.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(addBook.fulfilled, (state, action) => {
+        state.bookList.push(action.payload);
+      });
+  },
+});
 
 // export const getBookList = state => state.library.bookList;
 // export const getBooksStatus = state => state.library.status;

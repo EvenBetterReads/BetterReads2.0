@@ -2,19 +2,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const loginUser = createAsyncThunk('user/login', async data => {
+export const loginUser = createAsyncThunk('/api/user/login', async data => {
   try {
-    const response = await axios.post('/login', data);
-    return response.data;
+    const { username, password } = data;
+    const user = {};
+    const response = await axios.post('/api/user/login', data);
+    user.username = username;
+    user.password = password;
+    user.userId = response.data;
+    return user;
   } catch (err) {
     console.log({ error: 'Error in user validation.' });
   }
 });
 
-export const signupUser = createAsyncThunk('/signup', async data => {
+export const signupUser = createAsyncThunk('/api/user/signup', async data => {
   try {
-    const response = await axios.post('/signup', data);
-    return response.data;
+    const { username, password } = data;
+    const user = {};
+    const response = await axios.post('/api/user/signup', data);
+    user.username = username;
+    user.password = password;
+    user.userId = response.data;
+    return user;
   } catch (err) {
     console.log({ error: 'Error in user validation.' });
   }
@@ -46,8 +56,8 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
-        state.username = action.payload.user;
-        state.userId = action.payload.id;
+        state.username = action.payload.username;
+        state.userId = action.payload.userId;
         state.loggedIn = true;
       } else {
         state.failedLogin = true;
@@ -59,7 +69,7 @@ const userSlice = createSlice({
       builder.addCase(signupUser.fulfilled, (state, action) => {
         if (action.payload) {
           state.username = action.payload.username;
-          state.userId = action.payload.id;
+          state.userId = action.payload.userId;
           state.loggedIn = true;
         } else {
           state.failedSignup = true;

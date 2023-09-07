@@ -7,18 +7,18 @@ import '../styles/library.scss';
 
 function LibraryDashboard() {
   const userId = useSelector(state => state.user.userId);
+  console.log('userId: ', userId);
   // const bookCount = useSelector(state => state.library.bookCount);
   const bookData = useSelector(state => state.library.bookList);
   const dispatch = useDispatch();
 
   const body = {
-    userId: userId,
+    user_id: userId,
   };
 
   useEffect(() => {
-    console.log('body: ', body);
     dispatch(getBooks(body));
-  }, [rows]);
+  }, rows);
 
   const rows = bookData.map((book, index) => ({
     id: index + 1,

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { getBooks } from '../features/librarySlice';
+import '../styles/library.scss';
 
 function LibraryDashboard() {
   const username = useSelector(state => state.user.username);
@@ -42,18 +43,12 @@ function LibraryDashboard() {
   ];
 
   return (
-    <div style={styles.LibraryDashboard} className='libraryDashboard'>
+    <div className='libraryDashboard'>
       <Box>
         <DataGrid rows={rows} columns={columns} />
       </Box>
     </div>
   );
 }
-
-const styles = {
-  LibraryDashboard: {
-    display: 'flex',
-  },
-};
 
 export default LibraryDashboard;

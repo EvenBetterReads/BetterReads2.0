@@ -13,8 +13,6 @@ const sessionController = {};
  */
 sessionController.isLoggedIn = async (req, res, next) => {
   try {
-    console.log('THIS IS OUR REQUEST COOKIES:', req.cookies);
-
     // documents in the sessions collection will expire due to the schema expire setting
 
     const text = `

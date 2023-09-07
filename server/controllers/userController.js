@@ -29,17 +29,19 @@ userController.verifyUser = async (req, res, next) => {
     const text = `
     SELECT *
     FROM users
-    WHERE username = ($1)
+    WHERE username = $1;
     `;
     const value = [username];
     const user = await pool.query(text, value);
-    if (!user) {
+
+    if (!user.rows[0]._id) {
       //   throw new Error(
       //     `userController.verifyUser Error: No combination for User: ${username} and Password: ${password}`,
       //   );
       res.redirect('/signup');
     }
-    const comparison = await bcrypt.compare(password, user.password);
+    const comparison = await bcrypt.compare(password, user.rows[0].password);
+
     if (!comparison) {
       res.redirect('/signup');
     } else {

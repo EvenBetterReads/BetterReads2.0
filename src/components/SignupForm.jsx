@@ -41,4 +41,39 @@ function SignupForm(props) {
   );
 }
 
+const styles = {
+  loginContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: 'solid thin black',
+    alignItems: 'center',
+    width: '30%',
+    minWidth: '240px',
+    maxWidth: '350px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: 'solid thin black',
+    alignItems: 'center',
+    width: '100%%',
+    margin: '20px 10px 100px 10px',
+  },
+  h3: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: 'solid thin black',
+    alignItems: 'center',
+    width: '100%%',
+    textWrap: 'true',
+  },
+  error: {
+    color: 'red',
+    fontSize: 'small',
+    position: 'absolute',
+    alignSelf: 'center',
+    testWrap: 'wrap',
+  },
+};
+
 export default SignupForm;

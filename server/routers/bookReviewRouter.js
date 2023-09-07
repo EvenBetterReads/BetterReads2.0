@@ -43,13 +43,9 @@ router.post('/:id', bookReviewController.addBookReview, (req, res) => {
   return res.status(201).json(res.locals.newBookReview);
 });
 
-router.put(
-  '/:id',
-  bookReviewController.updateBookReview,
-  (req, res) => {
-    return res.status(201).json(res.locals.updateBookReview);
-  }
-);
+router.put('/:id', bookReviewController.updateBookReview, (req, res) => {
+  return res.status(201).json(res.locals.updateBookReview);
+});
 
 /**
  *
@@ -60,12 +56,8 @@ router.put(
  *
  * @returns successful deletion status
  */
-router.delete(
-  '/:id',
-  bookReviewController.deleteBookReview,
-  (req, res) => {
-    return res.status(200).json(res.locals.deleteBookReview);
-  }
-);
+router.delete('/:id', bookReviewController.deleteBookReview, (req, res) => {
+  return res.status(200).json(res.locals.deleteBookReview);
+});
 
 module.exports = router;

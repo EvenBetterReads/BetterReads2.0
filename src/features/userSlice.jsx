@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const loginUser = createAsyncThunk('/api/user/login', async data => {
+export const loginUser = createAsyncThunk('user/login', async data => {
   try {
     const { username, password } = data;
     const user = {};
@@ -16,7 +16,7 @@ export const loginUser = createAsyncThunk('/api/user/login', async data => {
   }
 });
 
-export const signupUser = createAsyncThunk('/api/user/signup', async data => {
+export const signupUser = createAsyncThunk('user/signup', async data => {
   try {
     const { username, password } = data;
     const user = {};

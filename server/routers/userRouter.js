@@ -23,7 +23,6 @@ router.post(
   cookieController.setSSIDCookie,
   sessionController.isLoggedIn,
   (req, res) => {
-    console.log('res.locals.user: ', res.locals.user);
     return res.status(200).json(res.locals.user);
   },
 );

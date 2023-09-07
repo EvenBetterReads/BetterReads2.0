@@ -44,7 +44,7 @@ function LibraryDashboard() {
 
   return (
     <div className='libraryDashboard'>
-      <Box>
+      <Box className='box'>
         <DataGrid rows={rows} columns={columns} />
       </Box>
     </div>

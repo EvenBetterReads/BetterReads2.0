@@ -8,11 +8,9 @@ const initialState = {
   error: null,
 };
 
-export const getBooks = createAsyncThunk('library/getBooks', async userId => {
+export const getBooks = createAsyncThunk('library/getBooks', async body => {
   try {
-    console.log('get books data', userId);
-    userId = 7;
-    const response = await axios.get(`/api/book_review/${userId}`);
+    const response = await axios.get(`/api/book_review/${body.user_id}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -21,8 +19,6 @@ export const getBooks = createAsyncThunk('library/getBooks', async userId => {
 
 export const addBook = createAsyncThunk('library/addBook', async data => {
   try {
-    console.log('data in add book: ', data);
-    data.user_id = 7;
     const response = await axios.post(`/api/book_review/${data.user_id}`, data);
     return response.data;
   } catch (err) {

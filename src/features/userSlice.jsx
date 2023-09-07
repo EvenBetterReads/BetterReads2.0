@@ -59,6 +59,7 @@ const userSlice = createSlice({
         state.username = action.payload.username;
         state.userId = action.payload.userId;
         state.loggedIn = true;
+        return state;
       } else {
         state.failedLogin = true;
       }
@@ -71,6 +72,7 @@ const userSlice = createSlice({
           state.username = action.payload.username;
           state.userId = action.payload.userId;
           state.loggedIn = true;
+          return state;
         } else {
           state.failedSignup = true;
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import LibraryDashboard from './libraryDashboard';
+import LibraryDashboard from './LibraryDashboard';
 import AddBookForm from './AddBookForm';
 import '../styles/library.scss';
 

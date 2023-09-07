@@ -6,17 +6,17 @@ import { getBooks } from '../features/librarySlice';
 import '../styles/library.scss';
 
 function LibraryDashboard() {
-  const username = useSelector(state => state.user.username);
+  const userId = useSelector(state => state.user.userId);
   // const bookCount = useSelector(state => state.library.bookCount);
   const bookData = useSelector(state => state.library.bookList);
   const dispatch = useDispatch();
 
   const body = {
-    username: username,
+    userId: userId,
   };
 
   useEffect(() => {
-    console.log('test');
+    console.log('body: ', body);
     dispatch(getBooks(body));
   }, [rows]);
 

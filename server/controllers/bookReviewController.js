@@ -56,7 +56,7 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
   try {
     // Destructure user_id
     const { user_id } = req.params;
-    console.log(user_id);
+    // console.log(user_id);
     // Write Query to Select book reviews for user
     const text = `
     SELECT _id, title, author, genre, summary, rating
@@ -66,8 +66,8 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
     `;
     const value = [user_id];
     const result = await pool.query(text, value);
-    console.log(req.body);
-    console.log('this is result', result);
+    // console.log(req.body);
+    // console.log('this is result', result);
     res.locals.bookReviews = result.rows;
 
     return next();
@@ -113,9 +113,9 @@ bookReviewController.addBookReview = async (req, res, next) => {
 
 bookReviewController.updateBookReview = async (req, res, next) => {
   try {
-    // Destructure
-    //console.log(req.params);
+    const { id } = req.params;
     const { title, author, genre, summary, rating } = req.body;
+    console.log(req.body)
 
     // Write statement to update
     const text = `
@@ -124,11 +124,11 @@ bookReviewController.updateBookReview = async (req, res, next) => {
       title = $1,
       author = $2,
       genre = $3,
-      rating = $4,
-      feeling = $5
-    WHERE user_id = _id;
+      summary = $4,
+      rating = $5
+    WHERE _id = $6;
   `;
-    const values = [title, author, genre, summary, rating];
+    const values = [title, author, genre, summary, rating, id];
     const result = await pool.query(text, values);
 
     res.locals.updateBookReview = result.rows[0];
@@ -148,7 +148,7 @@ bookReviewController.deleteBookReview = async (req, res, next) => {
     const { id } = req.params;
     const text = `
     DELETE FROM book_review
-    WHERE id = $1;
+    WHERE _id = $1;
   `;
 
     const value = [id];

@@ -1,4 +1,4 @@
-const bookReviewController = require('../controllers/bookReviewController')
+const bookReviewController = require('../controllers/bookReviewController');
 const express = require('express');
 const router = express.Router();
 

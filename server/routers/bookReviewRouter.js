@@ -16,7 +16,7 @@ const router = express.Router();
  * @returns All itineraries for the group Id
  */
 router.get(
-  '/:id',
+  '/:user_id',
   bookReviewController.getAllBookReviews,
   // bookReviewController.verifyUser,
   (req, res) => {

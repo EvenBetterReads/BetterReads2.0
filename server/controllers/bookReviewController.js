@@ -56,7 +56,7 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
   try {
     // Destructure user_id
     const { user_id } = req.params;
-
+    console.log(user_id);
     // Write Query to Select book reviews for user
     const text = `
     SELECT _id, title, author, genre, summary, rating
@@ -67,6 +67,7 @@ bookReviewController.getAllBookReviews = async (req, res, next) => {
     const value = [user_id];
     const result = await pool.query(text, value);
     console.log(req.body);
+    console.log('this is result', result);
     res.locals.bookReviews = result.rows;
 
     return next();

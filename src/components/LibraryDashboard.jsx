@@ -16,7 +16,6 @@ function LibraryDashboard() {
   };
 
   useEffect(() => {
-    console.log('test');
     dispatch(getBooks(body));
   }, [rows]);
 

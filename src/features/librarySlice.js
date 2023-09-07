@@ -64,7 +64,6 @@ const librarySlice = createSlice({
         // state.bookList = state.bookList.concat(loadedBooks)
         state.bookList = action.payload;
         state.loggedIn = true;
-        console.log('payload', action.payload);
       })
       .addCase(getBooks.rejected, (state, action) => {
         state.status = 'failed';

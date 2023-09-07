@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { getBooks } from '../features/librarySlice';
 import '../styles/library.scss';
+// import { Button } from '@mui/material';
 
 function LibraryDashboard() {
   const userId = useSelector(state => state.user.userId);
@@ -18,10 +19,24 @@ function LibraryDashboard() {
 
   useEffect(() => {
     dispatch(getBooks(body));
-  }, rows);
+  }, [bookData]);
+
+  const [clickedRow, setClickedRow] = React.useState();
+  const onButtonClick = (e, row) => {
+    console.log('row: ', row);
+    fetch(`api/book_review/${row.bookid}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    e.stopPropagation();
+    setClickedRow(row);
+  };
 
   const rows = bookData.map((book, index) => ({
     id: index + 1,
+    bookid: book._id,
     title: book.title,
     author: book.author,
     genre: book.genre,
@@ -34,6 +49,21 @@ function LibraryDashboard() {
       field: 'id',
       headerName: 'ID',
       width: 150,
+    },
+
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 400,
+      renderCell: params => {
+        return (
+          <button
+            onClick={e => onButtonClick(e, params.row)}
+            variant='contained'>
+            Delete
+          </button>
+        );
+      },
     },
     { field: 'title', headerName: 'Title', width: 350 },
     { field: 'author', headerName: 'Author', width: 150 },

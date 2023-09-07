@@ -1,15 +1,16 @@
-const bcrypt = require('bcryptjs');
 const pool = require('./../db/postgresModel');
+const SALT_WORK_FACTOR = 10;
+const bcrypt = require('bcryptjs');
 const userController = {};
 
 /**
- * If the userId and groupId are not found in our user_group table,
+ * If the username and password are not found in the users database
  * we should throw an error because this combination was not found.
  *
- * @param {Int} req.params.groupId
- * @param {Int} res.locals.userId
+ * @param {Str} req.body.username
+ * @param {Str} req.body.password
  *
- * @returns res.locals
+ * @returns res.locals.user
  */
 userController.verifyUser = async (req, res, next) => {
   try {
@@ -28,26 +29,24 @@ userController.verifyUser = async (req, res, next) => {
     const text = `
     SELECT *
     FROM users
-    WHERE username=($1) AND password=($2);
+    WHERE username=($1);
     `;
-    const values = [username, password];
-    const user = await pool.query(text, values);
-    if (!user.rows.length) {
+    const value = [username];
+    const user = await pool.query(text, value);
+    if (!user) {
       //   throw new Error(
       //     `userController.verifyUser Error: No combination for User: ${username} and Password: ${password}`,
       //   );
       res.redirect('/signup');
     }
-    bcrypt.compare(password, user.password).then(result => {
-      if (!result) {
-        res.redirect('/signup');
-      } else {
-        res.locals.user = user._id;
-      }
-    });
-
-    // If we have a row we can move on to the next verification
-    return next();
+    const comparison = await bcrypt.compare(password, user.password);
+    if (!comparison) {
+      res.redirect('/signup');
+    } else {
+      res.locals.user = user._id;
+      // If we have a row we can move on to the next verification
+      return next();
+    }
   } catch (err) {
     const errObj = {
       log: 'userController.verifyUser Error',
@@ -58,6 +57,14 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+/**
+ * createUser - create and save a new User into the users database.
+ *
+ * @param {Int} req.body
+ * @param {Int} res.locals.userId
+ *
+ * @returns res.locals
+ */
 userController.createUser = async (req, res, next) => {
   try {
     // Destructure user properties from body
@@ -70,14 +77,17 @@ userController.createUser = async (req, res, next) => {
         message: { error: 'An error occurred' },
       });
     } else {
+      const encryptedPassword = await bcrypt.hash(password, SALT_WORK_FACTOR);
       const text = `
         INSERT INTO users (username, password)
-        VALUES ($1, $2);
+        VALUES ($1, $2)
+        RETURNING _id;
         `;
-      const values = [username, password];
+      const values = [username, encryptedPassword];
       const result = await pool.query(text, values);
       console.log('result from create user query', result.rows[0]);
-      res.locals.user = result.rows[0].id;
+      res.locals.user = result.rows[0]._id;
+      console.log(res.locals.user);
       return next();
     }
   } catch (err) {
@@ -126,7 +136,7 @@ userController.deleteUser = async (req, res, next) => {
     const { userId } = req.params;
     const text = `
     DELETE FROM users
-    WHERE id = $1;
+    WHERE _id = $1;
   `;
 
     const value = [id];

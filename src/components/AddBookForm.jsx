@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Box from '@mui/material/Box';
-import { Button, Checkbox, FormControlLabel, FormGroup, FormLabel, Rating, TextField, Typography } from '@mui/material';
+import { Button, FormGroup, FormLabel, Rating, TextField, Typography } from '@mui/material';
 import { addBook } from '../features/librarySlice';
 
 // const sxStyle = {

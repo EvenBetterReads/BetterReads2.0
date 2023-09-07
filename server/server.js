@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 // require controllers
 // const userController = require('./controllers/userControllers');
@@ -11,6 +12,7 @@ const app = express();
 const PORT = 3005;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../src')));
 

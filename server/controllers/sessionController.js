@@ -1,46 +1,72 @@
-const Session = require('../models/userLibraryModels');
+const pool = require('./../db/postgresModel');
 
 const sessionController = {};
 
 /**
- * isLoggedIn - find the appropriate session for this request in the database, then
+ * isLoggedIn - find the appropriate session for this request in the user_session database, then
  * verify whether or not the session is still valid.
+ *
+ * @param {Int} req.cookies.ssid
+ * @param {Int} res.locals.user
+ *
+ * @returns next()
  */
-sessionController.isLoggedIn = (req, res, next) => {
-  console.log('THIS IS OUR REQUEST COOKIES:', req.cookies);
-  // documents in the sessions collection will expire due to the schema expire setting
-  Session.findOne({ cookieId: req.cookies.ssid }, (err, session) => {
-    if (err) {
-      // database error
-      return next({
-        log: 'Error occurred in sessionController.isLoggedIn.',
-        status: 500,
-        message: { err: 'An error occurred' },
-      });
-    } else if (!session) {
+sessionController.isLoggedIn = async (req, res, next) => {
+  try {
+    // documents in the sessions collection will expire due to the schema expire setting
+
+    const text = `
+    SELECT *
+    FROM user_session
+    WHERE cookie_id=($1) AND user_id=($2);
+    `;
+    const values = [req.cookies.ssid, res.locals.user];
+    const user_session = await pool.query(text, values);
+
+    if (!user_session) {
       // no session found
-      console.log('YOU ARE NOT LOGGED IN< NO SESSION!');
-      return res.redirect('/signup');
+      console.log('YOU ARE NOT LOGGED IN. NO SESSION!');
+      return res.redirect('/login');
     } else {
-      // session found
+      // session found then what?
       return next();
     }
-  });
+  } catch (err) {
+    const errObj = {
+      log: 'sessionController.isLoggedIn Error',
+      message: { error: 'An error occurred' },
+      status: 500,
+    };
+    return next({ ...errObj, log: err.message });
+  }
 };
 
 /**
- * startSession - create and save a new Session into the database.
+ * startSession - create and save a new Session into the user_session database.
+ *
+ * @param {Int} res.locals.user
+ *
+ * @returns res.locals
  */
-sessionController.startSession = (req, res, next) => {
-  Session.create({ cookieId: res.locals.user }, (err, session) => {
-    if (err)
-      return next({
-        log: 'Error occurred in sessionController.startSession.',
-        status: 500,
-        message: { err: 'An error occurred' },
-      });
-    else return next();
-  });
+sessionController.startSession = async (req, res, next) => {
+  try {
+    const text = `
+    INSERT INTO user_session (cookie_id, user_id, date_of_creation)
+    VALUES ($1, $2, $3);
+    `;
+    const timestamp = Date.now();
+    const values = [res.locals.user, res.locals.user, timestamp];
+
+    const user_session = await pool.query(text, values);
+
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error occurred in sessionController.startSession.',
+      status: 500,
+      message: { error: 'An error occurred' },
+    });
+  }
 };
 
 module.exports = sessionController;

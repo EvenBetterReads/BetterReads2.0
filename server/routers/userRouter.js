@@ -23,7 +23,7 @@ router.post(
   cookieController.setSSIDCookie,
   sessionController.isLoggedIn,
   (req, res) => {
-    return res.status(200).redirect('/dashboard');
+    return res.sendStatus(200);
   },
 );
 
@@ -41,7 +41,8 @@ router.post(
   cookieController.setSSIDCookie,
   sessionController.startSession,
   (req, res) => {
-    return res.status(201).redirect('/dashboard');
+    console.log('redirecting to /dashboard');
+    return res.sendStatus(201);
   },
 );
 
@@ -51,14 +52,9 @@ router.post(
  *
  * @returns response status 200
  */
-router.put(
-  '/:userId/',
-  userController.verifyUser,
-  userController.updateUser,
-  (req, res) => {
-    return res.status(200).json(res.locals.user);
-  },
-);
+router.put('/update/:userId', userController.updateUser, (req, res) => {
+  return res.sendStatus(200);
+});
 
 /**
  *
@@ -66,13 +62,8 @@ router.put(
  *
  * @returns successful deletion status
  */
-router.delete(
-  '/:userId',
-  userController.verifyUser,
-  userController.deleteUser,
-  (req, res) => {
-    return res.status(204).redirect('/signup');
-  },
-);
+router.delete('/delete/:userId', userController.deleteUser, (req, res) => {
+  return res.status(204).redirect('/');
+});
 
 module.exports = router;

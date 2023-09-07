@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS user_session(
     _id serial NOT NULL,
     cookie_id varchar NOT NULL,
     user_id bigint NOT NULL,
-    date_of_creation timestamp NOT NULL,
+    date_of_creation bigint NOT NULL,
     CONSTRAINT "user_session_pk0" PRIMARY KEY ("_id")
 ) WITH (OIDS=FALSE);
 
